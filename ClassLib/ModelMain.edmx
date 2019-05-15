@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BanksDBV2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="b_ID" />
+          </Key>
+          <Property Name="b_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="b_name" Type="nchar" MaxLength="256" Nullable="false" />
+          <Property Name="b_location" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="cl_ID" />
+          </Key>
+          <Property Name="cl_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cl_name" Type="nchar" MaxLength="256" Nullable="false" />
+          <Property Name="cl_clt_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientType">
+          <Key>
+            <PropertyRef Name="clt_ID" />
+          </Key>
+          <Property Name="clt_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clt_int" Type="int" Nullable="false" />
+          <Property Name="clt_text" Type="nchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="c_ID" />
+          </Key>
+          <Property Name="c_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_client_type" Type="int" Nullable="false" />
+          <Property Name="c_sum_max" Type="int" Nullable="false" />
+          <Property Name="c_sum_min" Type="int" Nullable="false" />
+          <Property Name="c_deposit_count_min" Type="int" Nullable="false" />
+          <Property Name="c_credit_count_max" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="con_ID" />
+          </Key>
+          <Property Name="con_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="con_o_ID" Type="int" Nullable="false" />
+          <Property Name="con_cl_ID" Type="int" Nullable="false" />
+          <Property Name="con_signing_date" Type="date" Nullable="false" />
+          <Property Name="con_finish_date" Type="date" Nullable="false" />
+          <Property Name="con_sum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Offers">
+          <Key>
+            <PropertyRef Name="o_ID" />
+          </Key>
+          <Property Name="o_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="o_b_ID" Type="int" Nullable="false" />
+          <Property Name="o_c_ID" Type="int" Nullable="false" />
+          <Property Name="o_name" Type="nchar" MaxLength="256" Nullable="false" />
+          <Property Name="o_percentage" Type="float" Nullable="false" />
+          <Property Name="o_ot_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfferType">
+          <Key>
+            <PropertyRef Name="ot_ID" />
+          </Key>
+          <Property Name="ot_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ot_type_int" Type="int" Nullable="false" />
+          <Property Name="ot_name" Type="nchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Clients_ClientType">
+          <End Role="ClientType" Type="Self.ClientType" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientType">
+              <PropertyRef Name="clt_ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="cl_clt_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="cl_ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="con_cl_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Offers">
+          <End Role="Offers" Type="Self.Offers" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offers">
+              <PropertyRef Name="o_ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="con_o_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_Banks">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="b_ID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="o_b_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_Conditions">
+          <End Role="Conditions" Type="Self.Conditions" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="c_ID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="o_c_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_OfferType">
+          <End Role="OfferType" Type="Self.OfferType" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferType">
+              <PropertyRef Name="ot_ID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="o_ot_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BanksDBV2ModelContainer">
+          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientType" EntityType="Self.ClientType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conditions" EntityType="Self.Conditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfferType" EntityType="Self.OfferType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clients_ClientType" Association="Self.FK_Clients_ClientType">
+            <End Role="ClientType" EntitySet="ClientType" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Clients" Association="Self.FK_Contracts_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Offers" Association="Self.FK_Contracts_Offers">
+            <End Role="Offers" EntitySet="Offers" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_Banks" Association="Self.FK_Offers_Banks">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_Conditions" Association="Self.FK_Offers_Conditions">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_OfferType" Association="Self.FK_Offers_OfferType">
+            <End Role="OfferType" EntitySet="OfferType" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BanksDBV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="b_ID" />
+          </Key>
+          <Property Name="b_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="b_name" Type="String" MaxLength="256" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="b_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK_Offers_Banks" FromRole="Banks" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="cl_ID" />
+          </Key>
+          <Property Name="cl_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cl_name" Type="String" MaxLength="256" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cl_clt_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClientType" Relationship="Self.FK_Clients_ClientType" FromRole="Clients" ToRole="ClientType" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Clients" FromRole="Clients" ToRole="Contracts" />
+        </EntityType>
+        <EntityType Name="ClientType">
+          <Key>
+            <PropertyRef Name="clt_ID" />
+          </Key>
+          <Property Name="clt_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clt_int" Type="Int32" Nullable="false" />
+          <Property Name="clt_text" Type="String" MaxLength="256" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_ClientType" FromRole="ClientType" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="c_ID" />
+          </Key>
+          <Property Name="c_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_client_type" Type="Int32" Nullable="false" />
+          <Property Name="c_sum_max" Type="Int32" Nullable="false" />
+          <Property Name="c_sum_min" Type="Int32" Nullable="false" />
+          <Property Name="c_deposit_count_min" Type="Int32" Nullable="false" />
+          <Property Name="c_credit_count_max" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK_Offers_Conditions" FromRole="Conditions" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="con_ID" />
+          </Key>
+          <Property Name="con_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="con_o_ID" Type="Int32" Nullable="false" />
+          <Property Name="con_cl_ID" Type="Int32" Nullable="false" />
+          <Property Name="con_signing_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="con_finish_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="con_sum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Contracts_Clients" FromRole="Contracts" ToRole="Clients" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK_Contracts_Offers" FromRole="Contracts" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="Offers">
+          <Key>
+            <PropertyRef Name="o_ID" />
+          </Key>
+          <Property Name="o_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="o_b_ID" Type="Int32" Nullable="false" />
+          <Property Name="o_c_ID" Type="Int32" Nullable="false" />
+          <Property Name="o_name" Type="String" MaxLength="256" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="o_percentage" Type="Double" Nullable="false" />
+          <Property Name="o_ot_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Banks" Relationship="Self.FK_Offers_Banks" FromRole="Offers" ToRole="Banks" />
+          <NavigationProperty Name="Conditions" Relationship="Self.FK_Offers_Conditions" FromRole="Offers" ToRole="Conditions" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Offers" FromRole="Offers" ToRole="Contracts" />
+          <NavigationProperty Name="OfferType" Relationship="Self.FK_Offers_OfferType" FromRole="Offers" ToRole="OfferType" />
+        </EntityType>
+        <EntityType Name="OfferType">
+          <Key>
+            <PropertyRef Name="ot_ID" />
+          </Key>
+          <Property Name="ot_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ot_type_int" Type="Int32" Nullable="false" />
+          <Property Name="ot_name" Type="String" MaxLength="256" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK_Offers_OfferType" FromRole="OfferType" ToRole="Offers" />
+        </EntityType>
+        <Association Name="FK_Offers_Banks">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="b_ID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="o_b_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_ClientType">
+          <End Role="ClientType" Type="Self.ClientType" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientType">
+              <PropertyRef Name="clt_ID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="cl_clt_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="cl_ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="con_cl_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_Conditions">
+          <End Role="Conditions" Type="Self.Conditions" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="c_ID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="o_c_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contracts_Offers">
+          <End Role="Offers" Type="Self.Offers" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offers">
+              <PropertyRef Name="o_ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="con_o_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offers_OfferType">
+          <End Role="OfferType" Type="Self.OfferType" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfferType">
+              <PropertyRef Name="ot_ID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="o_ot_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BanksDBV2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banks" EntityType="Self.Banks" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="ClientType" EntityType="Self.ClientType" />
+          <EntitySet Name="Conditions" EntityType="Self.Conditions" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" />
+          <EntitySet Name="Offers" EntityType="Self.Offers" />
+          <EntitySet Name="OfferType" EntityType="Self.OfferType" />
+          <AssociationSet Name="FK_Offers_Banks" Association="Self.FK_Offers_Banks">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_ClientType" Association="Self.FK_Clients_ClientType">
+            <End Role="ClientType" EntitySet="ClientType" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Clients" Association="Self.FK_Contracts_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_Conditions" Association="Self.FK_Offers_Conditions">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Offers" Association="Self.FK_Contracts_Offers">
+            <End Role="Offers" EntitySet="Offers" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offers_OfferType" Association="Self.FK_Offers_OfferType">
+            <End Role="OfferType" EntitySet="OfferType" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BanksDBV2ModelContainer" CdmEntityContainer="BanksDBV2Entities">
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="BanksDBV2Model.Banks">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="b_ID" ColumnName="b_ID" />
+                <ScalarProperty Name="b_name" ColumnName="b_name" />
+                <ScalarProperty Name="b_location" ColumnName="b_location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BanksDBV2Model.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="cl_ID" ColumnName="cl_ID" />
+                <ScalarProperty Name="cl_name" ColumnName="cl_name" />
+                <ScalarProperty Name="cl_clt_ID" ColumnName="cl_clt_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientType">
+            <EntityTypeMapping TypeName="BanksDBV2Model.ClientType">
+              <MappingFragment StoreEntitySet="ClientType">
+                <ScalarProperty Name="clt_ID" ColumnName="clt_ID" />
+                <ScalarProperty Name="clt_int" ColumnName="clt_int" />
+                <ScalarProperty Name="clt_text" ColumnName="clt_text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conditions">
+            <EntityTypeMapping TypeName="BanksDBV2Model.Conditions">
+              <MappingFragment StoreEntitySet="Conditions">
+                <ScalarProperty Name="c_ID" ColumnName="c_ID" />
+                <ScalarProperty Name="c_client_type" ColumnName="c_client_type" />
+                <ScalarProperty Name="c_sum_max" ColumnName="c_sum_max" />
+                <ScalarProperty Name="c_sum_min" ColumnName="c_sum_min" />
+                <ScalarProperty Name="c_deposit_count_min" ColumnName="c_deposit_count_min" />
+                <ScalarProperty Name="c_credit_count_max" ColumnName="c_credit_count_max" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="BanksDBV2Model.Contracts">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="con_ID" ColumnName="con_ID" />
+                <ScalarProperty Name="con_o_ID" ColumnName="con_o_ID" />
+                <ScalarProperty Name="con_cl_ID" ColumnName="con_cl_ID" />
+                <ScalarProperty Name="con_signing_date" ColumnName="con_signing_date" />
+                <ScalarProperty Name="con_finish_date" ColumnName="con_finish_date" />
+                <ScalarProperty Name="con_sum" ColumnName="con_sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offers">
+            <EntityTypeMapping TypeName="BanksDBV2Model.Offers">
+              <MappingFragment StoreEntitySet="Offers">
+                <ScalarProperty Name="o_ID" ColumnName="o_ID" />
+                <ScalarProperty Name="o_b_ID" ColumnName="o_b_ID" />
+                <ScalarProperty Name="o_c_ID" ColumnName="o_c_ID" />
+                <ScalarProperty Name="o_name" ColumnName="o_name" />
+                <ScalarProperty Name="o_percentage" ColumnName="o_percentage" />
+                <ScalarProperty Name="o_ot_ID" ColumnName="o_ot_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfferType">
+            <EntityTypeMapping TypeName="BanksDBV2Model.OfferType">
+              <MappingFragment StoreEntitySet="OfferType">
+                <ScalarProperty Name="ot_ID" ColumnName="ot_ID" />
+                <ScalarProperty Name="ot_type_int" ColumnName="ot_type_int" />
+                <ScalarProperty Name="ot_name" ColumnName="ot_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

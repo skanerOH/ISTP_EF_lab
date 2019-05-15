@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7b00b5fa673d43c691c4745eb57e57aa" Name="Diagram1">
+        <EntityTypeShape EntityType="BanksDBV2Model.Banks" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanksDBV2Model.Clients" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanksDBV2Model.ClientType" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanksDBV2Model.Conditions" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanksDBV2Model.Contracts" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanksDBV2Model.Offers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanksDBV2Model.OfferType" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="BanksDBV2Model.FK_Offers_Banks" ManuallyRouted="false" />
+        <AssociationConnector Association="BanksDBV2Model.FK_Clients_ClientType" ManuallyRouted="false" />
+        <AssociationConnector Association="BanksDBV2Model.FK_Contracts_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="BanksDBV2Model.FK_Offers_Conditions" ManuallyRouted="false" />
+        <AssociationConnector Association="BanksDBV2Model.FK_Contracts_Offers" ManuallyRouted="false" />
+        <AssociationConnector Association="BanksDBV2Model.FK_Offers_OfferType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
