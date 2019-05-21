@@ -112,6 +112,7 @@
     <Compile Include="RegisteredUsers.cs">
       <DependentUpon>ModelUsersDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="TransformationToXML.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ModelMain.edmx">

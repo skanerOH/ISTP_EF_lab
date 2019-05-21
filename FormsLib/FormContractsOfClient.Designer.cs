@@ -30,11 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridViewContracts = new System.Windows.Forms.DataGridView();
-            this.offersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.contractsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.buttonContractsDelete = new System.Windows.Forms.Button();
-            this.buttonContractsAddNew = new System.Windows.Forms.Button();
             this.o_name = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.offersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.o_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.consumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.o_percentage = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -45,6 +42,9 @@
             this.conIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.conclIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.conoIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contractsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonContractsDelete = new System.Windows.Forms.Button();
+            this.buttonContractsAddNew = new System.Windows.Forms.Button();
             this.comboBoxContractType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewContracts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.offersBindingSource)).BeginInit();
@@ -78,36 +78,6 @@
             this.dataGridViewContracts.Size = new System.Drawing.Size(664, 379);
             this.dataGridViewContracts.TabIndex = 0;
             // 
-            // offersBindingSource
-            // 
-            this.offersBindingSource.DataSource = typeof(ClassLib.Offers);
-            // 
-            // contractsBindingSource
-            // 
-            this.contractsBindingSource.DataSource = typeof(ClassLib.Contracts);
-            // 
-            // buttonContractsDelete
-            // 
-            this.buttonContractsDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.buttonContractsDelete.Location = new System.Drawing.Point(13, 13);
-            this.buttonContractsDelete.Name = "buttonContractsDelete";
-            this.buttonContractsDelete.Size = new System.Drawing.Size(150, 40);
-            this.buttonContractsDelete.TabIndex = 1;
-            this.buttonContractsDelete.Text = "Delete";
-            this.buttonContractsDelete.UseVisualStyleBackColor = true;
-            this.buttonContractsDelete.Click += new System.EventHandler(this.buttonContractsDelete_Click);
-            // 
-            // buttonContractsAddNew
-            // 
-            this.buttonContractsAddNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.buttonContractsAddNew.Location = new System.Drawing.Point(169, 13);
-            this.buttonContractsAddNew.Name = "buttonContractsAddNew";
-            this.buttonContractsAddNew.Size = new System.Drawing.Size(150, 40);
-            this.buttonContractsAddNew.TabIndex = 2;
-            this.buttonContractsAddNew.Text = "Add new";
-            this.buttonContractsAddNew.UseVisualStyleBackColor = true;
-            this.buttonContractsAddNew.Click += new System.EventHandler(this.buttonContractsAddNew_Click);
-            // 
             // o_name
             // 
             this.o_name.DataPropertyName = "con_o_ID";
@@ -120,6 +90,10 @@
             this.o_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.o_name.ValueMember = "o_ID";
             this.o_name.Width = 120;
+            // 
+            // offersBindingSource
+            // 
+            this.offersBindingSource.DataSource = typeof(ClassLib.Offers);
             // 
             // o_type
             // 
@@ -206,6 +180,32 @@
             this.conoIDDataGridViewTextBoxColumn.Name = "conoIDDataGridViewTextBoxColumn";
             this.conoIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.conoIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // contractsBindingSource
+            // 
+            this.contractsBindingSource.DataSource = typeof(ClassLib.Contracts);
+            // 
+            // buttonContractsDelete
+            // 
+            this.buttonContractsDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.buttonContractsDelete.Location = new System.Drawing.Point(13, 13);
+            this.buttonContractsDelete.Name = "buttonContractsDelete";
+            this.buttonContractsDelete.Size = new System.Drawing.Size(150, 40);
+            this.buttonContractsDelete.TabIndex = 1;
+            this.buttonContractsDelete.Text = "Delete";
+            this.buttonContractsDelete.UseVisualStyleBackColor = true;
+            this.buttonContractsDelete.Click += new System.EventHandler(this.buttonContractsDelete_Click);
+            // 
+            // buttonContractsAddNew
+            // 
+            this.buttonContractsAddNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.buttonContractsAddNew.Location = new System.Drawing.Point(169, 13);
+            this.buttonContractsAddNew.Name = "buttonContractsAddNew";
+            this.buttonContractsAddNew.Size = new System.Drawing.Size(150, 40);
+            this.buttonContractsAddNew.TabIndex = 2;
+            this.buttonContractsAddNew.Text = "Add new";
+            this.buttonContractsAddNew.UseVisualStyleBackColor = true;
+            this.buttonContractsAddNew.Click += new System.EventHandler(this.buttonContractsAddNew_Click);
             // 
             // comboBoxContractType
             // 

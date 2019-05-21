@@ -30,14 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridViewOffers = new System.Windows.Forms.DataGridView();
-            this.onameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.opercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.c_summax = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.conditionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.c_sum_min = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.c_min_deposit_count = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.c_credit_max_count = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ot_text = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.numericUpDownPercentage = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSum = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownDepCount = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownCredCount = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxOfferType = new System.Windows.Forms.ComboBox();
+            this.buttonOffersDelete = new System.Windows.Forms.Button();
+            this.buttonOffersFilter = new System.Windows.Forms.Button();
+            this.buttonOffersAddNew = new System.Windows.Forms.Button();
+            this.buttonTransformToXML = new System.Windows.Forms.Button();
+            this.onameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.opercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.conditionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.offerTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ocIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ootIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,23 +58,14 @@
             this.offerTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.oIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.offersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.numericUpDownPercentage = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownSum = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownDepCount = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownCredCount = new System.Windows.Forms.NumericUpDown();
-            this.comboBoxOfferType = new System.Windows.Forms.ComboBox();
-            this.buttonOffersDelete = new System.Windows.Forms.Button();
-            this.buttonOffersFilter = new System.Windows.Forms.Button();
-            this.buttonOffersAddNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOffers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.conditionsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.offerTypeBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.offersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDepCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCredCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.conditionsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.offerTypeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.offersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewOffers
@@ -99,21 +100,6 @@
             this.dataGridViewOffers.TabIndex = 0;
             this.dataGridViewOffers.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewOffers_DataError);
             // 
-            // onameDataGridViewTextBoxColumn
-            // 
-            this.onameDataGridViewTextBoxColumn.DataPropertyName = "o_name";
-            this.onameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.onameDataGridViewTextBoxColumn.Name = "onameDataGridViewTextBoxColumn";
-            this.onameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.onameDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // opercentageDataGridViewTextBoxColumn
-            // 
-            this.opercentageDataGridViewTextBoxColumn.DataPropertyName = "o_percentage";
-            this.opercentageDataGridViewTextBoxColumn.HeaderText = "Percentage";
-            this.opercentageDataGridViewTextBoxColumn.Name = "opercentageDataGridViewTextBoxColumn";
-            this.opercentageDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // c_summax
             // 
             this.c_summax.DataPropertyName = "o_c_ID";
@@ -126,10 +112,6 @@
             this.c_summax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.c_summax.ValueMember = "c_ID";
             this.c_summax.Width = 75;
-            // 
-            // conditionsBindingSource
-            // 
-            this.conditionsBindingSource.DataSource = typeof(ClassLib.Conditions);
             // 
             // c_sum_min
             // 
@@ -180,78 +162,6 @@
             this.ot_text.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ot_text.ValueMember = "ot_ID";
             // 
-            // offerTypeBindingSource
-            // 
-            this.offerTypeBindingSource.DataSource = typeof(ClassLib.OfferType);
-            // 
-            // ocIDDataGridViewTextBoxColumn
-            // 
-            this.ocIDDataGridViewTextBoxColumn.DataPropertyName = "o_c_ID";
-            this.ocIDDataGridViewTextBoxColumn.HeaderText = "o_c_ID";
-            this.ocIDDataGridViewTextBoxColumn.Name = "ocIDDataGridViewTextBoxColumn";
-            this.ocIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ocIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // ootIDDataGridViewTextBoxColumn
-            // 
-            this.ootIDDataGridViewTextBoxColumn.DataPropertyName = "o_ot_ID";
-            this.ootIDDataGridViewTextBoxColumn.HeaderText = "o_ot_ID";
-            this.ootIDDataGridViewTextBoxColumn.Name = "ootIDDataGridViewTextBoxColumn";
-            this.ootIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ootIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // obIDDataGridViewTextBoxColumn
-            // 
-            this.obIDDataGridViewTextBoxColumn.DataPropertyName = "o_b_ID";
-            this.obIDDataGridViewTextBoxColumn.HeaderText = "o_b_ID";
-            this.obIDDataGridViewTextBoxColumn.Name = "obIDDataGridViewTextBoxColumn";
-            this.obIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.obIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // banksDataGridViewTextBoxColumn
-            // 
-            this.banksDataGridViewTextBoxColumn.DataPropertyName = "Banks";
-            this.banksDataGridViewTextBoxColumn.HeaderText = "Banks";
-            this.banksDataGridViewTextBoxColumn.Name = "banksDataGridViewTextBoxColumn";
-            this.banksDataGridViewTextBoxColumn.ReadOnly = true;
-            this.banksDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // conditionsDataGridViewTextBoxColumn
-            // 
-            this.conditionsDataGridViewTextBoxColumn.DataPropertyName = "Conditions";
-            this.conditionsDataGridViewTextBoxColumn.HeaderText = "Conditions";
-            this.conditionsDataGridViewTextBoxColumn.Name = "conditionsDataGridViewTextBoxColumn";
-            this.conditionsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.conditionsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // contractsDataGridViewTextBoxColumn
-            // 
-            this.contractsDataGridViewTextBoxColumn.DataPropertyName = "Contracts";
-            this.contractsDataGridViewTextBoxColumn.HeaderText = "Contracts";
-            this.contractsDataGridViewTextBoxColumn.Name = "contractsDataGridViewTextBoxColumn";
-            this.contractsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.contractsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // offerTypeDataGridViewTextBoxColumn
-            // 
-            this.offerTypeDataGridViewTextBoxColumn.DataPropertyName = "OfferType";
-            this.offerTypeDataGridViewTextBoxColumn.HeaderText = "OfferType";
-            this.offerTypeDataGridViewTextBoxColumn.Name = "offerTypeDataGridViewTextBoxColumn";
-            this.offerTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.offerTypeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // oIDDataGridViewTextBoxColumn
-            // 
-            this.oIDDataGridViewTextBoxColumn.DataPropertyName = "o_ID";
-            this.oIDDataGridViewTextBoxColumn.HeaderText = "o_ID";
-            this.oIDDataGridViewTextBoxColumn.Name = "oIDDataGridViewTextBoxColumn";
-            this.oIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.oIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // offersBindingSource
-            // 
-            this.offersBindingSource.DataSource = typeof(ClassLib.Offers);
-            // 
             // textBoxName
             // 
             this.textBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -296,7 +206,7 @@
             this.numericUpDownSum.Size = new System.Drawing.Size(142, 29);
             this.numericUpDownSum.TabIndex = 3;
             this.numericUpDownSum.Value = new decimal(new int[] {
-            1,
+            1000,
             0,
             0,
             0});
@@ -384,12 +294,115 @@
             this.buttonOffersAddNew.UseVisualStyleBackColor = true;
             this.buttonOffersAddNew.Click += new System.EventHandler(this.buttonOffersAddNew_Click);
             // 
+            // buttonTransformToXML
+            // 
+            this.buttonTransformToXML.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.buttonTransformToXML.Location = new System.Drawing.Point(522, 24);
+            this.buttonTransformToXML.Name = "buttonTransformToXML";
+            this.buttonTransformToXML.Size = new System.Drawing.Size(203, 40);
+            this.buttonTransformToXML.TabIndex = 10;
+            this.buttonTransformToXML.Text = "Transform to XML";
+            this.buttonTransformToXML.UseVisualStyleBackColor = true;
+            this.buttonTransformToXML.Click += new System.EventHandler(this.buttonTransformToXML_Click);
+            // 
+            // onameDataGridViewTextBoxColumn
+            // 
+            this.onameDataGridViewTextBoxColumn.DataPropertyName = "o_name";
+            this.onameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.onameDataGridViewTextBoxColumn.Name = "onameDataGridViewTextBoxColumn";
+            this.onameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.onameDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // opercentageDataGridViewTextBoxColumn
+            // 
+            this.opercentageDataGridViewTextBoxColumn.DataPropertyName = "o_percentage";
+            this.opercentageDataGridViewTextBoxColumn.HeaderText = "Percentage";
+            this.opercentageDataGridViewTextBoxColumn.Name = "opercentageDataGridViewTextBoxColumn";
+            this.opercentageDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // conditionsBindingSource
+            // 
+            this.conditionsBindingSource.DataSource = typeof(ClassLib.Conditions);
+            // 
+            // offerTypeBindingSource
+            // 
+            this.offerTypeBindingSource.DataSource = typeof(ClassLib.OfferType);
+            // 
+            // ocIDDataGridViewTextBoxColumn
+            // 
+            this.ocIDDataGridViewTextBoxColumn.DataPropertyName = "o_c_ID";
+            this.ocIDDataGridViewTextBoxColumn.HeaderText = "o_c_ID";
+            this.ocIDDataGridViewTextBoxColumn.Name = "ocIDDataGridViewTextBoxColumn";
+            this.ocIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ocIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // ootIDDataGridViewTextBoxColumn
+            // 
+            this.ootIDDataGridViewTextBoxColumn.DataPropertyName = "o_ot_ID";
+            this.ootIDDataGridViewTextBoxColumn.HeaderText = "o_ot_ID";
+            this.ootIDDataGridViewTextBoxColumn.Name = "ootIDDataGridViewTextBoxColumn";
+            this.ootIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ootIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // obIDDataGridViewTextBoxColumn
+            // 
+            this.obIDDataGridViewTextBoxColumn.DataPropertyName = "o_b_ID";
+            this.obIDDataGridViewTextBoxColumn.HeaderText = "o_b_ID";
+            this.obIDDataGridViewTextBoxColumn.Name = "obIDDataGridViewTextBoxColumn";
+            this.obIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.obIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // banksDataGridViewTextBoxColumn
+            // 
+            this.banksDataGridViewTextBoxColumn.DataPropertyName = "Banks";
+            this.banksDataGridViewTextBoxColumn.HeaderText = "Banks";
+            this.banksDataGridViewTextBoxColumn.Name = "banksDataGridViewTextBoxColumn";
+            this.banksDataGridViewTextBoxColumn.ReadOnly = true;
+            this.banksDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // conditionsDataGridViewTextBoxColumn
+            // 
+            this.conditionsDataGridViewTextBoxColumn.DataPropertyName = "Conditions";
+            this.conditionsDataGridViewTextBoxColumn.HeaderText = "Conditions";
+            this.conditionsDataGridViewTextBoxColumn.Name = "conditionsDataGridViewTextBoxColumn";
+            this.conditionsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.conditionsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // contractsDataGridViewTextBoxColumn
+            // 
+            this.contractsDataGridViewTextBoxColumn.DataPropertyName = "Contracts";
+            this.contractsDataGridViewTextBoxColumn.HeaderText = "Contracts";
+            this.contractsDataGridViewTextBoxColumn.Name = "contractsDataGridViewTextBoxColumn";
+            this.contractsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.contractsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // offerTypeDataGridViewTextBoxColumn
+            // 
+            this.offerTypeDataGridViewTextBoxColumn.DataPropertyName = "OfferType";
+            this.offerTypeDataGridViewTextBoxColumn.HeaderText = "OfferType";
+            this.offerTypeDataGridViewTextBoxColumn.Name = "offerTypeDataGridViewTextBoxColumn";
+            this.offerTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.offerTypeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // oIDDataGridViewTextBoxColumn
+            // 
+            this.oIDDataGridViewTextBoxColumn.DataPropertyName = "o_ID";
+            this.oIDDataGridViewTextBoxColumn.HeaderText = "o_ID";
+            this.oIDDataGridViewTextBoxColumn.Name = "oIDDataGridViewTextBoxColumn";
+            this.oIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.oIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // offersBindingSource
+            // 
+            this.offersBindingSource.DataSource = typeof(ClassLib.Offers);
+            // 
             // FormOffersOfBank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::FormsLib.Properties.Resources.background_money;
             this.ClientSize = new System.Drawing.Size(738, 450);
+            this.Controls.Add(this.buttonTransformToXML);
             this.Controls.Add(this.buttonOffersAddNew);
             this.Controls.Add(this.buttonOffersFilter);
             this.Controls.Add(this.buttonOffersDelete);
@@ -405,13 +418,13 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormOffersOfBank_FormClosed);
             this.Load += new System.EventHandler(this.FormOffersOfBank_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOffers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.conditionsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.offerTypeBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.offersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPercentage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDepCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCredCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.conditionsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.offerTypeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.offersBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,5 +460,6 @@
         private System.Windows.Forms.Button buttonOffersDelete;
         private System.Windows.Forms.Button buttonOffersFilter;
         private System.Windows.Forms.Button buttonOffersAddNew;
+        private System.Windows.Forms.Button buttonTransformToXML;
     }
 }

@@ -36,22 +36,28 @@ namespace FormsLib
 
             comboBoxOfferType.SelectedIndex = 2;
 
-            ctx.Offers.Load();
-            offersBindingSource.DataSource = ctx.Offers.Local.ToBindingList();
-
-            ctx.Conditions.Load();
-            conditionsBindingSource.DataSource = ctx.Conditions.Local.ToBindingList();
-
-            ctx.OfferType.Load();
-            offerTypeBindingSource.DataSource = ctx.OfferType.Local.ToBindingList();
-
-            ctx.Dispose();
-            ctx = new BanksDBV2Entities();
-
-            var query = (from c in ctx.Offers
-                         where (c.o_b_ID == b_id)
-                         select c);
+            var query = (from offer in ctx.Offers
+                         join con in ctx.Conditions on offer.o_c_ID equals con.c_ID
+                         where (offer.o_b_ID == b_id &&
+                                con.c_credit_count_max >= (int)numericUpDownCredCount.Value &&
+                                con.c_deposit_count_min <= (int)numericUpDownDepCount.Value &&
+                                con.c_sum_max >= (int)numericUpDownSum.Value && con.c_sum_min <= (int)numericUpDownSum.Value)
+                         select offer);
             query = query.Where(c => c.o_b_ID == b_id);
+            if (!String.IsNullOrWhiteSpace(textBoxName.Text))
+            {
+                query = query.Where(c => c.o_name.Contains(textBoxName.Text));
+            }
+            if (comboBoxOfferType.SelectedIndex != 2)
+            {
+                query = query.Where(c => c.o_ot_ID == (comboBoxOfferType.SelectedIndex + 1));
+            }
+
+            if ((int)numericUpDownPercentage.Value != 0)
+            {
+                query = query.Where(c => c.o_percentage == (int)numericUpDownPercentage.Value);
+            }
+
             query.Load();
             offersBindingSource.DataSource = ctx.Offers.Local.ToBindingList();
 
@@ -145,21 +151,6 @@ namespace FormsLib
             {
                 query = query.Where(c => c.o_percentage == (int)numericUpDownPercentage.Value);
             }
-            /*foreach( var offer in query)
-            {
-                var condition = (from con in ctx.Conditions
-                                 where (con.c_ID == offer.o_c_ID &&
-                                 con.c_credit_count_max > (int)numericUpDownCredCount.Value &&
-                              con.c_deposit_count_min < (int)numericUpDownDepCount.Value &&
-                              con.c_sum_max > (int)numericUpDownSum.Value && con.c_sum_min < (int)numericUpDownSum.Value)
-                                 select con).Any();
-                if (!condition)
-                {
-                    query = query.Where(c => c.o_ID != offer.o_ID);
-                }
-            }*/
-
-            //query = query.Where(c => OfferHasCondition(c));
 
             query.Load();
             offersBindingSource.DataSource = ctx.Offers.Local.ToBindingList();
@@ -209,6 +200,56 @@ namespace FormsLib
         private void FormOffersOfBank_FormClosed(object sender, FormClosedEventArgs e)
         {
             ctx.Dispose();
+        }
+
+        private void buttonTransformToXML_Click(object sender, EventArgs e)
+        {
+            ctx.Dispose();
+            ctx = new BanksDBV2Entities();
+
+            var query = (from offer in ctx.Offers
+                         join con in ctx.Conditions on offer.o_c_ID equals con.c_ID
+                         where (offer.o_b_ID == b_id &&
+                                con.c_credit_count_max >= (int)numericUpDownCredCount.Value &&
+                                con.c_deposit_count_min <= (int)numericUpDownDepCount.Value &&
+                                con.c_sum_max >= (int)numericUpDownSum.Value && con.c_sum_min <= (int)numericUpDownSum.Value)
+                         select offer);
+            query = query.Where(c => c.o_b_ID == b_id);
+            if (!String.IsNullOrWhiteSpace(textBoxName.Text))
+            {
+                query = query.Where(c => c.o_name.Contains(textBoxName.Text));
+            }
+            if (comboBoxOfferType.SelectedIndex != 2)
+            {
+                query = query.Where(c => c.o_ot_ID == (comboBoxOfferType.SelectedIndex + 1));
+            }
+
+            if ((int)numericUpDownPercentage.Value != 0)
+            {
+                query = query.Where(c => c.o_percentage == (int)numericUpDownPercentage.Value);
+            }
+
+            if (query==null)
+            {
+                MessageBox.Show("There is nothing to transform");
+            }
+            else
+            {
+                TransformToXML(query);
+            }
+        }
+
+        private void TransformToXML(IQueryable<ClassLib.Offers> offers)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "All files(*.*|*.*";
+            if (saveFileDialog.ShowDialog()==DialogResult.Cancel)
+            {
+                return;
+            }
+            string path = saveFileDialog.FileName;
+            TransformationToXML.Transform(offers, path);
+            MessageBox.Show("File was successfully created!");
         }
     }
 }
