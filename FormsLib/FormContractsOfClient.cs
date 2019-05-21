@@ -15,13 +15,31 @@ namespace FormsLib
     public partial class FormContractsOfClient : Form
     {
         private int cl_id;
+        private ClassLib.RegisteredUsers user;
         private ClassLib.BanksDBV2Entities ctx;
-        public FormContractsOfClient(int cl_idtemp)
+        public FormContractsOfClient(int cl_idtemp, ClassLib.RegisteredUsers tempo)
         {
+            user = tempo;
             InitializeComponent();
             cl_id = cl_idtemp;
+
+            if (user.access_lvl>0)
+            {
+
+            }
+            else
+            {
+                SetSettingsForUser();
+            }
+
             comboBoxContractType.SelectedIndex = 0;
             LoadContracts();
+        }
+
+        private void SetSettingsForUser()
+        {
+            buttonContractsAddNew.Visible = false;
+            buttonContractsDelete.Visible = false;
         }
 
         private void LoadContracts()

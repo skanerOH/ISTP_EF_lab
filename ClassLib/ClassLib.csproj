@@ -82,6 +82,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelMain.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ModelUsersDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelUsersDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelUsersDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelUsersDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelUsersDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelUsersDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Offers.cs">
       <DependentUpon>ModelMain.tt</DependentUpon>
     </Compile>
@@ -89,6 +104,14 @@
       <DependentUpon>ModelMain.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RegisteredUsers.cs">
+      <DependentUpon>ModelUsersDB.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ModelMain.edmx">
@@ -101,7 +124,18 @@
     <None Include="ModelMain.edmx.diagram">
       <DependentUpon>ModelMain.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="ModelUsersDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelUsersDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelUsersDB.edmx.diagram">
+      <DependentUpon>ModelUsersDB.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModelMain.Context.tt">
@@ -113,6 +147,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelMain.edmx</DependentUpon>
       <LastGenOutput>ModelMain.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelUsersDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelUsersDB.edmx</DependentUpon>
+      <LastGenOutput>ModelUsersDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelUsersDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelUsersDB.edmx</DependentUpon>
+      <LastGenOutput>ModelUsersDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

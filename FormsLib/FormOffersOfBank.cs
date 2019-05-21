@@ -15,13 +15,24 @@ namespace FormsLib
     public partial class FormOffersOfBank : Form
     {
         private int b_id;
+        private ClassLib.RegisteredUsers user;
         private BanksDBV2Entities ctx;
 
-        public FormOffersOfBank(int b_idtempo)
+        public FormOffersOfBank(int b_idtempo, ClassLib.RegisteredUsers tempo)
         {
+            user = tempo;
             InitializeComponent();
             ctx = new BanksDBV2Entities();
             b_id = b_idtempo;
+
+            if (user.access_lvl>0)
+            {
+
+            }
+            else
+            {
+                SetSettingsForUser();
+            }
 
             comboBoxOfferType.SelectedIndex = 2;
 
@@ -49,6 +60,12 @@ namespace FormsLib
 
             ctx.OfferType.Load();
             offerTypeBindingSource.DataSource = ctx.OfferType.Local.ToBindingList();
+        }
+
+        private void SetSettingsForUser()
+        {
+            buttonOffersAddNew.Visible = false;
+            buttonOffersDelete.Visible = false;
         }
 
         private void FormOffersOfBank_Load(object sender, EventArgs e)

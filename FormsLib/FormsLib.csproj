@@ -83,6 +83,18 @@
     <Compile Include="FormOffersOfBank.Designer.cs">
       <DependentUpon>FormOffersOfBank.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSignIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSignIn.Designer.cs">
+      <DependentUpon>FormSignIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSignUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSignUp.Designer.cs">
+      <DependentUpon>FormSignUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAddNewContract.resx">
@@ -99,6 +111,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOffersOfBank.resx">
       <DependentUpon>FormOffersOfBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSignIn.resx">
+      <DependentUpon>FormSignIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSignUp.resx">
+      <DependentUpon>FormSignUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

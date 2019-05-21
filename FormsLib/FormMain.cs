@@ -15,10 +15,21 @@ namespace FormsLib
     public partial class FormMain : Form
     {
         private ClassLib.BanksDBV2Entities ctx;
+        private ClassLib.RegisteredUsers logedInUser;
 
-        public FormMain()
+        public FormMain(ClassLib.RegisteredUsers temp)
         {
+            logedInUser = temp;
             InitializeComponent();
+
+            if (logedInUser.access_lvl>0)
+            {
+
+            }
+            else
+            {
+                SetSettingForUser();
+            }
             ctx = new BanksDBV2Entities();
 
             ctx.Banks.Load();
@@ -29,6 +40,25 @@ namespace FormsLib
 
             ctx.ClientType.Load();
             this.clientTypeBindingSource.DataSource = ctx.ClientType.Local.ToBindingList();
+        }
+
+        private void SetSettingForUser()
+        {
+            dataGridViewBanks.ReadOnly = true;
+            dataGridViewBanks.AllowUserToAddRows = false;
+            dataGridViewBanks.AllowUserToDeleteRows = false;
+
+            dataGridViewClients.ReadOnly = true;
+            dataGridViewClients.AllowUserToDeleteRows = false;
+            dataGridViewClients.AllowUserToAddRows = false;
+
+            buttonBanksDelete.Visible = false;
+
+            buttonBanksSave.Visible = false;
+
+            buttonClientsDelete.Visible = false;
+
+            buttonClientsSave.Visible = false;
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -112,7 +142,7 @@ namespace FormsLib
         {
             int b_id = (int)dataGridViewBanks.CurrentRow.Cells["biddataGridViewTextBoxColumn"].Value;
             this.Hide();
-            FormOffersOfBank formOffersOfBank = new FormOffersOfBank(b_id);
+            FormOffersOfBank formOffersOfBank = new FormOffersOfBank(b_id,logedInUser);
 
             formOffersOfBank.ShowDialog();
             formOffersOfBank.Dispose();
@@ -124,7 +154,7 @@ namespace FormsLib
         {
             int cl_id = (int)dataGridViewClients.CurrentRow.Cells["cliddataGridViewTextBoxColumn"].Value;
             this.Hide();
-            FormContractsOfClient formContractsOfClient = new FormContractsOfClient(cl_id);
+            FormContractsOfClient formContractsOfClient = new FormContractsOfClient(cl_id,logedInUser);
 
             formContractsOfClient.ShowDialog();
             formContractsOfClient.Dispose();
