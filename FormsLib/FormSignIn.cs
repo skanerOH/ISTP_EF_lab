@@ -78,5 +78,16 @@ namespace FormsLib
             ctx = new ClassLib.UsersDBEntities();
             ctx.RegisteredUsers.Load();
         }
+
+        private void buttonSignUp_Click_1(object sender, EventArgs e)
+        {
+            FormSignUp formSignUp = new FormSignUp();
+            this.Hide();
+            formSignUp.ShowDialog(this);
+            formSignUp.Dispose();
+            this.Show();
+            ctx = new ClassLib.UsersDBEntities();
+            ctx.RegisteredUsers.Load();
+        }
     }
 }
